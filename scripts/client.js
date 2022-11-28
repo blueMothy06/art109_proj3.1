@@ -247,30 +247,30 @@ function init() {
   // });
 
   //   3D obj
-  var mesh1;
-  // Load preanimated model, add material, and add it to the scene
-  const loader1 = new GLTFLoader().load(
-    "./assets/car.glb",
-    function(gltf) {
-      gltf.scene.traverse(function(child) {
-        if (child.isMesh) {
-          // child.material = newMaterial;
-        }
-      });
-      // set position and scale
-      mesh1 = gltf.scene;
-      mesh1.position.set(120, 10, -20);
-      mesh1.rotation.set(0, 110, 0);
-      mesh1.scale.set(8, 8, 8);
-      // Add model to scene
-      scene.add(mesh1);
-
-    },
-    undefined,
-    function(error) {
-      console.error(error);
-    }
-  );
+  // var mesh1;
+  // // Load preanimated model, add material, and add it to the scene
+  // const loader1 = new GLTFLoader().load(
+  //   "./assets/car.glb",
+  //   function(gltf) {
+  //     gltf.scene.traverse(function(child) {
+  //       if (child.isMesh) {
+  //         // child.material = newMaterial;
+  //       }
+  //     });
+  //     // set position and scale
+  //     mesh1 = gltf.scene;
+  //     mesh1.position.set(120, 10, -20);
+  //     mesh1.rotation.set(0, 110, 0);
+  //     mesh1.scale.set(8, 8, 8);
+  //     // Add model to scene
+  //     scene.add(mesh1);
+  //
+  //   },
+  //   undefined,
+  //   function(error) {
+  //     console.error(error);
+  //   }
+  // );
 
   // const mixer = new AnimationMixer(mesh1);
   // const clock = new Clock();
