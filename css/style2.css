@@ -1,14 +1,14 @@
 /* Style sheet from index.html and gtlf.html
 This is used because of the differences needed for the full screen style.*/
 /* @font-face {
-  font-family: Josefin Sans;
-  src: url(JosefinSans-Medium.ttf);
+  font-family: Sue Ellen Francisco;
+  src: url(SueEllenFrancisco-Regular.ttf);
 } */
-@import url("https://fonts.googleapis.com/css?family=JosefinSans");
+@import url("//fonts.googleapis.com/css?family=Sue+Ellen+Francisco");
 
 html,
 body {
-  font-family: "Josefin Sans", sans-serif;
+  font-family:  cursive;
   margin: auto;
   background-color: black;
 }
