@@ -1,11 +1,9 @@
 /* Style sheet from index.html and gtlf.html
 This is used because of the differences needed for the full screen style.*/
-
 /* @font-face {
   font-family: Josefin Sans;
   src: url(JosefinSans-Medium.ttf);
 } */
-
 @import url("https://fonts.googleapis.com/css?family=JosefinSans");
 
 html,
@@ -16,14 +14,15 @@ body {
 
 h1 {
   font-style: bold;
-  color: #2E9939;
+  color: #e8ffee;
+  font-size: 50px;
   text-align: center;
   padding-top: 200px;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 }
 
 h2 {
-  color: #2E5999;
+  color: #aa99ba;
   text-align: center;
   padding-bottom: 20px;
 }
@@ -41,7 +40,7 @@ p.move-mid {
   padding-left: 0%;
   text-align: center;
   margin: auto;
-  color: #6E2E99;
+  color: #5e7d8f;
 }
 
 a {
@@ -59,12 +58,10 @@ a {
 #instructions {
   width: 100%;
   height: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   text-align: center;
   font-size: 18px;
   cursor: pointer;

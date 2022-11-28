@@ -33,7 +33,7 @@ canvas {
 
 h1 {
   font-style: bold;
-  color: #2E9939;
+  color: #310f61;
   max-width: 75%;
   text-align: center;
   margin: auto;
@@ -41,8 +41,8 @@ h1 {
 }
 
 h2 {
-  color: #2E5999;
-  max-width: 75%;
+  color: #aa99ba;
+  max-width: 50%;
   text-align: center;
   margin: auto;
   padding-bottom: 20px;

@@ -5,19 +5,28 @@
 // Import required source code
 // Import three.js core
 import * as THREE from "../build/three.module.js";
+import {
+  AnimationClip,
+  AnimationMixer
+} from "../build/three.module.js";
+
+
 // Import pointer lock controls
 import {
   PointerLockControls
 } from "../src/PointerLockControls.js";
 import {
-    GLTFLoader
+  GLTFLoader
 } from "../src/GLTFLoader.js";
 import {
   FontLoader
-} from "../src/FontLoader.js"
+} from "../src/FontLoader.js";
+
+// const { EffectComposer, RenderPass, GlitchPass, ShaderPass } =
+//         ENABLE3D
 
 // Establish variables
-let camera, renderer, controls, material;
+let camera, renderer, controls, material, composer, renderPass, glitchPass;
 
 var scene = new THREE.Scene(); // initialising the scene
 scene.background = new THREE.Color(0xff0000);
@@ -192,39 +201,47 @@ function init() {
     scene.add(planes[i]);
   }
 
+  // composer = new THREE.EffectComposer(renderer);
+  //
+  //   renderPass = new THREE.RenderPass(scene, camera);
+  //   composer.addPass(renderPass);
+  //
+  //   // Glitching
+  //   glitchPass = new THREE.GlitchPass();
+  //   composer.addPass(glitchPass);
 
-  // Add Text under models
-  const loader3 = new FontLoader();
-  loader3.load('./assets/fonts/JosefinSans-Medium.ttf.json', function(font) {
-    // Define font color
-    const color = 0x2E5999;
-    // Define font material
-    const matDark = new THREE.LineBasicMaterial({
-      color: color,
-      side: THREE.DoubleSide
-    });
-    // Generate and place left side text
-    const message = "Static Model";
-    const shapes = font.generateShapes(message, .5);
-    const geometry = new THREE.ShapeGeometry(shapes);
-    geometry.computeBoundingBox();
-    const xMid = -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
-    geometry.translate(xMid, 0, 0);
-    const text = new THREE.Mesh(geometry, matDark);
-    text.position.set(-4, -4, 0);
-    scene.add(text);
+  // // Add Text under models
+  // const loader3 = new FontLoader();
+  // loader3.load('./assets/fonts/JosefinSans-Medium.ttf.json', function(font) {
+  //   // Define font color
+  //   const color = 0x2E5999;
+  //   // Define font material
+  //   const matDark = new THREE.LineBasicMaterial({
+  //     color: color,
+  //     side: THREE.DoubleSide
+  //   });
+  //   // Generate and place left side text
+  //   const message = "Static Model";
+  //   const shapes = font.generateShapes(message, .5);
+  //   const geometry = new THREE.ShapeGeometry(shapes);
+  //   geometry.computeBoundingBox();
+  //   const xMid = -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
+  //   geometry.translate(xMid, 0, 0);
+  //   const text = new THREE.Mesh(geometry, matDark);
+  //   text.position.set(-4, -4, 0);
+  //   scene.add(text);
 
-    // Generate and place right side text
-    const message2 = "bawk bawk";
-    const shapes2 = font.generateShapes(message2, .5);
-    const geometry2 = new THREE.ShapeGeometry(shapes2);
-    geometry2.computeBoundingBox();
-    const xMid2 = -0.5 * (geometry2.boundingBox.max.x - geometry2.boundingBox.min.x);
-    geometry2.translate(xMid2, 0, 0);
-    const text2 = new THREE.Mesh(geometry2, matDark);
-    text2.position.set(4, 17, -14);
-    scene.add(text2);
-  });
+  // Generate and place right side text
+  //   const message2 = "bawk bawk";
+  //   const shapes2 = font.generateShapes(message2, .5);
+  //   const geometry2 = new THREE.ShapeGeometry(shapes2);
+  //   geometry2.computeBoundingBox();
+  //   const xMid2 = -0.5 * (geometry2.boundingBox.max.x - geometry2.boundingBox.min.x);
+  //   geometry2.translate(xMid2, 0, 0);
+  //   const text2 = new THREE.Mesh(geometry2, matDark);
+  //   text2.position.set(4, 17, -14);
+  //   scene.add(text2);
+  // });
 
   //   3D obj
   var mesh1;
@@ -239,7 +256,7 @@ function init() {
       });
       // set position and scale
       mesh1 = gltf.scene;
-      mesh1.position.set(0, 10, -70);
+      mesh1.position.set(120, 10, -20);
       mesh1.rotation.set(0, 110, 0);
       mesh1.scale.set(8, 8, 8);
       // Add model to scene
@@ -251,6 +268,21 @@ function init() {
       console.error(error);
     }
   );
+
+  // const mixer = new AnimationMixer(mesh1);
+  // const clock = new Clock();
+  //
+  // // you must do this every frame
+  // const delta = clock.getDelta();
+  // mixer.update(delta);
+  //
+  // const updateAmount = 1; // in seconds
+  //
+  // mixer.update(updateAmount);
+  //
+  // mesh.tick = (delta) => mixer.update(delta);
+  //
+  // updatables.push(mesh1);
 
   var mesh2;
   // Load preanimated model, add material, and add it to the scene
@@ -364,6 +396,19 @@ function init() {
 
   // Listen for window resizing
   window.addEventListener("resize", onWindowResize);
+}
+
+function setupModel(data) {
+  // const model = data.scene.children[0];
+  const clip = data.animations[0];
+
+  const mixer = new AnimationMixer(mesh1);
+  const action = mixer.clipAction(clip);
+  action.play();
+
+  mesh1.tick = (delta) => mixer.update(delta);
+
+  return mesh1;
 }
 
 // Window resizing function
