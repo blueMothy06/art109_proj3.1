@@ -181,7 +181,7 @@ function init() {
   //images
 
   var planes = [];
-  var planeImages = ["./assets/neighbors/isaac1.png", "./assets/neighbors/olivia1.png"];
+  var planeImages = ["./assets/neighbors/neigh1.png", "./assets/neighbors/neigh2.png", "./assets/neighbors/neigh3.png"];
   var planeGeometry = new THREE.PlaneGeometry(10, 23);
   for (var i = 0; i < planeImages.length; i++) {
     var planeMaterial = new THREE.MeshBasicMaterial({
@@ -194,9 +194,12 @@ function init() {
     planes[i].position.y = 2 * i * (i % 2 == 0 ? 1 : -1) * 0.25;
     planes[i].position.z = -2;
     if (i == 0) {
-      planes[i].position.set(10, 10, -1);
-    } else {
-      planes[i].position.set(20, 10, -1);
+      planes[i].position.set(120, 10, 40);
+    } else if (i==1){
+      planes[i].position.set(-120, 10, -50);
+    }
+    else{
+      planes[i].position.set(-50, 10, -100);
     }
     scene.add(planes[i]);
   }
